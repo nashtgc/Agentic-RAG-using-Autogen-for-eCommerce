@@ -37,7 +37,7 @@ class CustomerSupportAgent:
             "config_list": [
                 {
                     "model": "gpt-4",
-                    "api_key": "YOUR_API_KEY",
+                    "api_key": None,  # Set via environment or config
                 }
             ],
             "temperature": 0.7,
@@ -159,8 +159,8 @@ We offer the following shipping options:
             priority: Annotated[str, "Priority level: low, medium, or high"] = "medium",
         ) -> str:
             """Create a support ticket."""
-            import random
-            ticket_id = f"TKT-{random.randint(100000, 999999)}"  # noqa: S311
+            import uuid
+            ticket_id = f"TKT-{uuid.uuid4().hex[:8].upper()}"
 
             return f"""**Support Ticket Created**
 

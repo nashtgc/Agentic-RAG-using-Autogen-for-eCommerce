@@ -9,6 +9,10 @@ from chromadb.api.types import EmbeddingFunction, Documents, Embeddings
 from ..data.products import Product, SAMPLE_PRODUCTS
 
 
+# Constants for embedding calculation
+MAX_UINT32 = 2**32
+
+
 class SimpleEmbeddingFunction(EmbeddingFunction):
     """Simple hash-based embedding function for offline use.
 
@@ -90,7 +94,7 @@ class SimpleEmbeddingFunction(EmbeddingFunction):
             hash_input = f"{text}_{i}"
             hash_bytes = hashlib.sha256(hash_input.encode()).digest()
             # Convert to float between -1 and 1
-            value = (int.from_bytes(hash_bytes[:4], "big") / (2**32)) * 2 - 1
+            value = (int.from_bytes(hash_bytes[:4], "big") / MAX_UINT32) * 2 - 1
             embedding.append(value)
 
         return embedding

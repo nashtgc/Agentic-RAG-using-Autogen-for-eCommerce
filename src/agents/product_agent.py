@@ -39,7 +39,7 @@ class ProductSearchAgent:
             "config_list": [
                 {
                     "model": "gpt-4",
-                    "api_key": "YOUR_API_KEY",  # Should be set via environment
+                    "api_key": None,  # Set via environment or config
                 }
             ],
             "temperature": 0.7,
